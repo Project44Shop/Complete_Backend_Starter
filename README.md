@@ -1,6 +1,4 @@
-# 🌟 Backend Starter With DB Connection Template
-
-A starter with DB connection using Prisma template for building modern backend applications using **Node.js**, **Express**, **TypeScript**, and **Prisma**. This project includes essential features like API documentation with Swagger, database connectivity with Prisma, unit testing with Jest, and a robust development workflow.
+# Course Platform API
 
 ---
 

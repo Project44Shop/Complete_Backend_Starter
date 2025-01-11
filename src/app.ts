@@ -8,12 +8,15 @@ import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import swaggerOptions from './config/Swagger';
 import authRoute from './routes/auth.route'
+import cookieParser from 'cookie-parser';
+
 
 // 1. Load environment variables
 dotenv.config();
 
 // 2. Initialize the app
 const app = express();
+app.use(cookieParser());
 
 // 3. Middleware
 app.use(express.json());

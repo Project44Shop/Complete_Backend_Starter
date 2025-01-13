@@ -12,6 +12,9 @@
 - **Jest** with **Supertest** for comprehensive unit testing.
 - **ESLint** and **Prettier** for code consistency and formatting.
 - **Nodemon** for live reloading during development.
+- **Express Rate Limiter** to control request rates.
+- **Cookie Parser** for handling cookies.
+- **JWT** for authentication.
 
 ---
 
@@ -20,8 +23,8 @@
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/Course-Platform-Backend
-   cd Course-Platform-Backend
+   git clone https://github.com/Project44Shop/Complete_Backend_Starter.git
+   cd Complete_Backend_Starter
    ```
 
 2. **Install dependencies**:
@@ -37,6 +40,8 @@
      ```env
      DATABASE_URL="your_mongodb_connection_string"
      PORT=9000
+     JWT_SECRET="your_jwt_secret"
+     NODE_ENV="development" # Set to "production" when deploying to enforce HTTPS and secure cookies
      ```
 
 4. **Run database migrations**:
@@ -86,7 +91,6 @@ course-backend/
 └── tsconfig.json         # TypeScript configuration
 ```
 
-
 ---
 
 ## 🔧 Usage
@@ -96,6 +100,3 @@ course-backend/
 3. Use **Swagger** to document your endpoints for easy exploration.
 4. Write and run tests with Jest for every feature you add.
 5. Manage your database schema and queries with **Prisma**.
-
----
-

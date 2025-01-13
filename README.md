@@ -1,4 +1,6 @@
-# Course Platform API
+# Complete Backend Starter
+
+This repository is a Node.js + Express + TypeScript backend starter designed to kickstart development with a modern, scalable architecture. It includes essential tools like Prisma for database management, JWT for authentication, and Swagger for API documentation. Use this starter to build secure, type-safe, and production-ready APIs efficiently.
 
 ---
 

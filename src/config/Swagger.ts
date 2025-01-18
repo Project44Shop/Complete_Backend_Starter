@@ -3,7 +3,7 @@ const swaggerOptions = {
     definition: {
       openapi: '3.0.0',
       info: {
-        title: 'Course Platform API',
+        title: 'Complete Backend API Starter',
         version: '1.0.0',
         description: 'Backend Starter',
       },
@@ -14,7 +14,6 @@ const swaggerOptions = {
       ],
     },
     apis: ['./src/**/*.ts'], 
-    // apis: ['./src/routes/**/*.ts'],
   // Path to your route files
   };
 

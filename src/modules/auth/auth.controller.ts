@@ -7,11 +7,6 @@ import AuthService from "./auth.service";
   
 const saltRounds = 10;
 
-// const JWT_SECRET = process.env.JWT_SECRET;
-// if (!JWT_SECRET) {
-//   throw new Error("JWT_SECRET is not defined");
-// }
-
 const TOKEN_EXPIRATION = "7d"; // Token validity period
 
 

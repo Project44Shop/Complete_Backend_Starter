@@ -1,6 +1,7 @@
+// Defines routes for authentication
 import { Router } from "express";
-import { login, logout, register } from "../controllers/auth.controller";
 import rateLimit from 'express-rate-limit';
+import AuthController from "./auth.controller";
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -23,7 +24,7 @@ const router = Router();
  *       200:
  *         description: Adds the new user to the database 
  */
-router.post('/register', register)
+router.post('/register', AuthController.register);
 
 /**
  * @swagger
@@ -34,7 +35,7 @@ router.post('/register', register)
  *       200:
  *         description: Authenticate the user 
  */
-router.post('/login', loginLimiter, login)
+router.post('/login', loginLimiter, AuthController.login);
 
 /**
  * @swagger
@@ -45,7 +46,7 @@ router.post('/login', loginLimiter, login)
  *       200:
  *         description: Logout the user
  */
-router.post('/logout', logout)
+router.post('/logout', AuthController.logout);
 
 
 export default router;

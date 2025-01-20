@@ -70,14 +70,17 @@ This repository is a Node.js + Express + TypeScript backend starter designed to 
 course-backend/
 ├── node_modules/         # Dependencies installed via npm
 ├── src/                  # Source code for the application
-│   ├── __tests__/        # Unit tests for the application
-│   ├── config/           # Configuration files (e.g., environment setup)
-│   ├── controllers/      # Route handler logic for the application
-│   ├── middlewares/      # Middleware functions for request handling
-│   ├── models/           # Prisma models (database schemas)
-│   ├── routes/           # API route definitions
-│   ├── services/         # Business logic and service layer
-│   ├── utils/            # Utility functions and helpers
+│   ├── __tests__/        # Unit tests
+│   │   ┗ 📜server.test.ts
+│   ├── config/           # Configuration files (e.g., Swagger setup)
+│   │   ┗ 📜Swagger.ts
+│   ├── modules/          # Feature-specific modules
+│   │   ├── auth/         # Authentication module
+│   │       ├── __tests__/        # Unit tests for authentication
+│   │       │   ┗ 📜auth.test.ts
+│   │       ├── auth.controller.ts # Handles HTTP requests
+│   │       ├── auth.route.ts      # Defines routes for authentication
+│   │       └── auth.service.ts    # Encapsulates business logic for authentication
 │   ├── app.ts            # App initialization (middleware, routes, etc.)
 │   └── server.ts         # Entry point of the application
 ├── prisma/               # Prisma schema and migrations
@@ -91,6 +94,7 @@ course-backend/
 ├── package-lock.json     # Lockfile for dependencies
 ├── README.md             # Documentation for the project
 └── tsconfig.json         # TypeScript configuration
+
 ```
 
 ---

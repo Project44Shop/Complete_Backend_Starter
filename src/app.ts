@@ -1,13 +1,10 @@
 // This file should handle the application configuration.
-// Include middleware, routes, and other app-related setups.
-// Avoid starting the server here to keep it decoupled for testing.
-
 import express, { Request, Response } from 'express';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import swaggerOptions from './config/Swagger';
-import authRoute from './routes/auth.route'
+import authRoute from './modules/auth/auth.route'
 import cookieParser from 'cookie-parser';
 
 

@@ -1,13 +1,6 @@
 // Handles only HTTP requests
 import { Request, Response } from "express";
-import prisma from "../../../lib/prisma"
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import AuthService from "./auth.service";
-  
-const saltRounds = 10;
-
-const TOKEN_EXPIRATION = "7d"; // Token validity period
 
 
 class AuthController {

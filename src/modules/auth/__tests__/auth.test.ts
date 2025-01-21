@@ -3,6 +3,7 @@ process.env.JWT_SECRET = "test_secret_key"; // Mock environment variable
 import request from 'supertest';
 import app from '../../../app'; // Your Express app
 import prisma from '../../../../lib/prisma'; // Mock the database
+import bcrypt from 'bcrypt';
 
 beforeAll(() => {
     jest.spyOn(console, 'error').mockImplementation(() => {}); // Suppress console.error
@@ -27,6 +28,8 @@ const mockUser = {
   username: 'testuser',
   password: BCRYPT_HASH,
 };
+
+const bcryptCompare = jest.spyOn(bcrypt, 'compare') as jest.Mock;
 
 describe('Auth Controller', () => {
   describe('POST /register', () => {
@@ -56,7 +59,7 @@ describe('Auth Controller', () => {
   describe('POST /login', () => {
     it('should log in a user successfully', async () => {
       (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
-      const bcryptCompare = jest.spyOn(require('bcrypt'), 'compare').mockResolvedValue(true);
+      bcryptCompare.mockResolvedValue(true);
 
       const res = await request(app)
         .post('/api/auth/login')
@@ -69,7 +72,7 @@ describe('Auth Controller', () => {
 
     it('should return 500 for invalid credentials', async () => {
       (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
-      const bcryptCompare = jest.spyOn(require('bcrypt'), 'compare').mockResolvedValue(false);
+      bcryptCompare.mockResolvedValue(false);
 
       const res = await request(app)
         .post('/api/auth/login')

@@ -3,6 +3,7 @@
 import prisma from "../../../lib/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { ErrorMessages } from "../../utils/ErrorMessages";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const TOKEN_EXPIRATION = "7d";
@@ -19,7 +20,7 @@ class AuthService {
     static async loginUser(username: string, password: string) {
 
         if (!JWT_SECRET) {
-            throw new Error("JWT_SECRET is not defined");
+            throw new Error(ErrorMessages.JWT_SECRET_UNDEFINED);
         }
 
         const user = await prisma.user.findUnique({
@@ -27,13 +28,13 @@ class AuthService {
         })
 
         if (!user) {
-            throw new Error("Invalid Credentials");
+            throw new Error(ErrorMessages.INVALID_CREDENTIALS);
         }
 
         const isValidPassword = await bcrypt.compare(password, user.password);
 
         if (!isValidPassword) {
-            throw new Error("Invalid Credentials")
+            throw new Error(ErrorMessages.INVALID_CREDENTIALS)
         }
 
         // Create JWT

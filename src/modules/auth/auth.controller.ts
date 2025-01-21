@@ -1,6 +1,9 @@
 // Handles only HTTP requests
 import { Request, Response } from "express";
 import AuthService from "./auth.service";
+import { HttpStatus } from "../../utils/HttpStatus";
+import { ErrorMessages } from "../../utils/ErrorMessages";
+import { SuccessMessages } from "../../utils/SuccessMessages";
 
 
 class AuthController {
@@ -9,12 +12,12 @@ class AuthController {
     try {
       const { email, username, password } = req.body;
       const newUser = await AuthService.registerUser(email, username, password);
-      res.status(201).json(newUser);
+      res.status(HttpStatus.CREATED).json(newUser);
     } catch (error) {
       console.error(error);
       res
-      .status(500)
-      .send('Error creating user');
+      .status(HttpStatus.INTERNAL_SERVER_ERROR)
+      .send(ErrorMessages.USER_CREATION_FAILED);
     }
   }
 
@@ -28,20 +31,20 @@ class AuthController {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         secure: process.env.NODE_ENV === "production",
     })
-        .status(200)
-        .json("User Login Success");
+        .status(HttpStatus.OK)
+        .json(SuccessMessages.USER_LOGGED_IN);
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Failed to login" });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: ErrorMessages.LOGIN_FAILED });
     }
   }
 
   static logout = (req: Request, res: Response) => {
     res
     .clearCookie("authToken")
-    .status(200)
-    .json({message: "Logout Success"})
+    .status(HttpStatus.OK)
+    .json({message: SuccessMessages.USER_LOGGED_OUT})
 };
 
 }

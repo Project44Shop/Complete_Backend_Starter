@@ -4,6 +4,9 @@ import request from 'supertest';
 import app from '../../../app'; // Your Express app
 import prisma from '../../../../lib/prisma'; // Mock the database
 import bcrypt from 'bcrypt';
+import { HttpStatus } from '../../../utils/HttpStatus';
+import { SuccessMessages } from '../../../utils/SuccessMessages';
+import { ErrorMessages } from '../../../utils/ErrorMessages';
 
 beforeAll(() => {
     jest.spyOn(console, 'error').mockImplementation(() => {}); // Suppress console.error
@@ -40,7 +43,7 @@ describe('Auth Controller', () => {
         .post('/api/auth/register')
         .send({ email: 'test@example.com', username: 'testuser', password: 'password123' });
 
-      expect(res.statusCode).toBe(201);
+      expect(res.statusCode).toBe(HttpStatus.CREATED);
       expect(res.body).toEqual(mockUser);
     });
 
@@ -51,7 +54,7 @@ describe('Auth Controller', () => {
         .post('/api/auth/register')
         .send({ email: 'test@example.com', username: 'testuser', password: 'password123' });
 
-      expect(res.statusCode).toBe(500);
+      expect(res.statusCode).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
       expect(res.text).toBe('Error creating user');
     });
   });
@@ -65,7 +68,7 @@ describe('Auth Controller', () => {
         .post('/api/auth/login')
         .send({ username: 'testuser', password: 'password123' });
 
-      expect(res.statusCode).toBe(200);
+      expect(res.statusCode).toBe(HttpStatus.OK);
       expect(res.headers['set-cookie']).toBeDefined();
       bcryptCompare.mockRestore();
     });
@@ -78,8 +81,8 @@ describe('Auth Controller', () => {
         .post('/api/auth/login')
         .send({ username: 'testuser', password: 'wrongpassword' });
 
-      expect(res.statusCode).toBe(500);
-      expect(res.body.message).toBe('Failed to login');
+      expect(res.statusCode).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
+      expect(res.body.message).toBe(ErrorMessages.LOGIN_FAILED);
       bcryptCompare.mockRestore();
     });
   });
@@ -88,8 +91,8 @@ describe('Auth Controller', () => {
     it('should clear the authToken cookie and return success', async () => {
       const res = await request(app).post('/api/auth/logout');
   
-      expect(res.statusCode).toBe(200);
-      expect(res.body.message).toBe('Logout Success');
+      expect(res.statusCode).toBe(HttpStatus.OK);
+      expect(res.body.message).toBe(SuccessMessages.USER_LOGGED_OUT);
       expect(res.headers['set-cookie'][0]).toMatch(/authToken=;/); // Check cookie is cleared
     });
   });
@@ -99,8 +102,8 @@ describe('Auth Controller', () => {
     it('should log out a user successfully', async () => {
       const res = await request(app).post('/api/auth/logout');
 
-      expect(res.statusCode).toBe(200);
-      expect(res.body.message).toBe('Logout Success');
+      expect(res.statusCode).toBe(HttpStatus.OK);
+      expect(res.body.message).toBe(SuccessMessages.USER_LOGGED_OUT);
     });
   });
 });

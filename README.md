@@ -112,7 +112,6 @@ Here is the system design for the backend:
 
 ![System Design](./src/assets/system-design.png)
 
-
 ---
 
 ## 🔧 Usage

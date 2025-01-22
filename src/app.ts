@@ -24,7 +24,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // 5. Routes
 app.use('/api', routes);
-// app.use('/api/auth', authRoute);
 
 // Base Route Documentation
 /**

@@ -110,8 +110,7 @@ course-backend/
 
 Here is the system design for the backend:
 
-![System Design](./assets/system-design.png)
-
+![System Design](./src/assets/system-design.png)
 
 ---
 

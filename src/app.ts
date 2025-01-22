@@ -4,7 +4,7 @@ import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import swaggerOptions from './config/Swagger';
-import authRoute from './modules/auth/auth.route'
+import routes from './routes/index'
 import cookieParser from 'cookie-parser';
 
 
@@ -23,7 +23,7 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // 5. Routes
-app.use('/api/auth', authRoute);
+app.use('/api', routes);
 
 // Base Route Documentation
 /**

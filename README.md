@@ -70,21 +70,30 @@ This repository is a Node.js + Express + TypeScript backend starter designed to 
 course-backend/
 ├── node_modules/         # Dependencies installed via npm
 ├── src/                  # Source code for the application
-│   ├── __tests__/        # Unit tests
+│   ├── __tests__/        # Unit tests for the application
 │   │   ┗ 📜server.test.ts
 │   ├── config/           # Configuration files (e.g., Swagger setup)
 │   │   ┗ 📜Swagger.ts
+│   ├── middleware/       # Custom middleware functions
+│   │   ├── rateLimiter.ts # Middleware for rate-limiting API requests
 │   ├── modules/          # Feature-specific modules
 │   │   ├── auth/         # Authentication module
-│   │       ├── __tests__/        # Unit tests for authentication
-│   │       │   ┗ 📜auth.test.ts
-│   │       ├── auth.controller.ts # Handles HTTP requests
+│   │       ├── auth.controller.ts # Handles HTTP requests for authentication
 │   │       ├── auth.route.ts      # Defines routes for authentication
-│   │       └── auth.service.ts    # Encapsulates business logic for authentication
+│   │       ├── auth.service.ts    # Business logic for authentication
+│   │       └── __tests__/         # Unit tests for authentication
+│   ├── routes/           # Centralized route definitions
+│   │   ┗ 📜index.ts       # Combines all module routes
+│   ├── utils/            # Utility files (e.g., enums, helper functions)
+│   │   ├── ErrorMessages.ts # Centralized error message definitions
+│   │   ├── HttpStatus.ts    # Enum for HTTP status codes
+│   │   └── SuccessMessages.ts # Centralized success message definitions
 │   ├── app.ts            # App initialization (middleware, routes, etc.)
 │   └── server.ts         # Entry point of the application
 ├── prisma/               # Prisma schema and migrations
-│   ├── schema.prisma     # Prisma schema file
+│   └── schema.prisma     # Prisma schema file
+├── __tests__/                # General tests for the application
+│   └── server.test.ts    # Main server test
 ├── .env                  # Environment variables (not included in the repo)
 ├── .gitignore            # Ignored files for Git
 ├── .prettierrc           # Prettier configuration
@@ -96,6 +105,13 @@ course-backend/
 └── tsconfig.json         # TypeScript configuration
 
 ```
+
+## System Design
+
+Here is the system design for the backend:
+
+![System Design](./assets/system-design.png)
+
 
 ---
 

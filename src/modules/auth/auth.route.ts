@@ -1,18 +1,8 @@
 // Defines routes for authentication
 import { Router } from "express";
-import rateLimit from 'express-rate-limit';
 import AuthController from "./auth.controller";
-import { ErrorMessages } from "../../utils/ErrorMessages";
+import { loginLimiter } from "../../middleware/rateLimiter";
 
-const loginLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 login attempts per `windowMs`
-  message: {
-    message: ErrorMessages.RATE_LIMIT_TRY_LATER,
-  },
-  standardHeaders: true, // Return rate limit info in `RateLimit-*` headers
-  legacyHeaders: false, // Disable `X-RateLimit-*` headers
-});
 
 const router = Router();
 

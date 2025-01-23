@@ -3,9 +3,9 @@ const swaggerOptions = {
     definition: {
       openapi: '3.0.0',
       info: {
-        title: 'Edukante Backend API ',
+        title: 'Complete Backend API Starter',
         version: '1.0.0',
-        description: 'Educante Courses API',
+        description: 'Backend Starter',
       },
       servers: [
         {
